@@ -26,12 +26,11 @@ black_friday = pd.read_csv("black_friday.csv")
 
 # ## Inicie sua análise a partir daqui
 
-# In[87]:
+# In[91]:
 
 
-mySet = black_friday.isnull().nunique()
-nullSet = mySet[mySet > 1].count()
-nullSet / mySet.count()
+mySet = black_friday
+mySet['Product_Category_3'].mode()
 
 
 # ## Questão 1
@@ -123,6 +122,7 @@ def q6():
 
 def q7():
     # Retorne aqui o resultado da questão 7.
+    return int(mySet['Product_Category_3'].mode())
     pass
 
 
