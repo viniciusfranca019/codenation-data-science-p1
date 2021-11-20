@@ -26,21 +26,23 @@ black_friday = pd.read_csv("black_friday.csv")
 
 # ## Inicie sua análise a partir daqui
 
-# In[ ]:
+# In[42]:
 
 
-
+count = black_friday.loc[(black_friday['Age'] == '26-35') & (black_friday['Gender'] == 'F'), ['User_ID']].count()
+print(count.User_ID)
 
 
 # ## Questão 1
 # 
 # Quantas observações e quantas colunas há no dataset? Responda no formato de uma tuple `(n_observacoes, n_colunas)`.
 
-# In[4]:
+# In[ ]:
 
 
 def q1():
     # Retorne aqui o resultado da questão 1.
+    return black_friday.shape
     pass
 
 
@@ -48,11 +50,13 @@ def q1():
 # 
 # Há quantas mulheres com idade entre 26 e 35 anos no dataset? Responda como um único escalar.
 
-# In[5]:
+# In[ ]:
 
 
 def q2():
     # Retorne aqui o resultado da questão 2.
+    count = black_friday.loc[(black_friday['Age'] == '26-35') & (black_friday['Gender'] == 'F'), ['User_ID']].count()
+    return int(count.User_ID)
     pass
 
 
@@ -60,7 +64,7 @@ def q2():
 # 
 # Quantos usuários únicos há no dataset? Responda como um único escalar.
 
-# In[6]:
+# In[ ]:
 
 
 def q3():
@@ -72,7 +76,7 @@ def q3():
 # 
 # Quantos tipos de dados diferentes existem no dataset? Responda como um único escalar.
 
-# In[7]:
+# In[ ]:
 
 
 def q4():
@@ -84,7 +88,7 @@ def q4():
 # 
 # Qual porcentagem dos registros possui ao menos um valor null (`None`, `ǸaN` etc)? Responda como um único escalar entre 0 e 1.
 
-# In[8]:
+# In[ ]:
 
 
 def q5():
@@ -96,7 +100,7 @@ def q5():
 # 
 # Quantos valores null existem na variável (coluna) com o maior número de null? Responda como um único escalar.
 
-# In[9]:
+# In[ ]:
 
 
 def q6():
@@ -108,7 +112,7 @@ def q6():
 # 
 # Qual o valor mais frequente (sem contar nulls) em `Product_Category_3`? Responda como um único escalar.
 
-# In[10]:
+# In[ ]:
 
 
 def q7():
@@ -120,7 +124,7 @@ def q7():
 # 
 # Qual a nova média da variável (coluna) `Purchase` após sua normalização? Responda como um único escalar.
 
-# In[11]:
+# In[ ]:
 
 
 def q8():
@@ -132,7 +136,7 @@ def q8():
 # 
 # Quantas ocorrências entre -1 e 1 inclusive existem da variáel `Purchase` após sua padronização? Responda como um único escalar.
 
-# In[12]:
+# In[ ]:
 
 
 def q9():
@@ -144,7 +148,7 @@ def q9():
 # 
 # Podemos afirmar que se uma observação é null em `Product_Category_2` ela também o é em `Product_Category_3`? Responda com um bool (`True`, `False`).
 
-# In[13]:
+# In[ ]:
 
 
 def q10():
