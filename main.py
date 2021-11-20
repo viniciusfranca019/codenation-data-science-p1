@@ -26,10 +26,12 @@ black_friday = pd.read_csv("black_friday.csv")
 
 # ## Inicie sua análise a partir daqui
 
-# In[46]:
+# In[87]:
 
 
-black_friday.nunique().User_ID
+mySet = black_friday.isnull().nunique()
+nullSet = mySet[mySet > 1].count()
+nullSet / mySet.count()
 
 
 # ## Questão 1
@@ -81,6 +83,7 @@ def q3():
 
 def q4():
     # Retorne aqui o resultado da questão 4.
+    return int(black_friday.nunique().sum())
     pass
 
 
@@ -93,6 +96,9 @@ def q4():
 
 def q5():
     # Retorne aqui o resultado da questão 5.
+    mySet = black_friday.isnull().nunique()
+    nullSet = mySet[mySet > 1].count()
+    return float(nullSet / mySet.count())
     pass
 
 
