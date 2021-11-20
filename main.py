@@ -26,11 +26,10 @@ black_friday = pd.read_csv("black_friday.csv")
 
 # ## Inicie sua análise a partir daqui
 
-# In[42]:
+# In[46]:
 
 
-count = black_friday.loc[(black_friday['Age'] == '26-35') & (black_friday['Gender'] == 'F'), ['User_ID']].count()
-print(count.User_ID)
+black_friday.nunique().User_ID
 
 
 # ## Questão 1
@@ -69,6 +68,7 @@ def q2():
 
 def q3():
     # Retorne aqui o resultado da questão 3.
+    return int(black_friday.nunique().User_ID)
     pass
 
 
