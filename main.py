@@ -26,18 +26,17 @@ black_friday = pd.read_csv("black_friday.csv")
 
 # ## Inicie sua análise a partir daqui
 
-# In[91]:
+# In[38]:
 
 
-mySet = black_friday
-mySet['Product_Category_3'].mode()
+
 
 
 # ## Questão 1
 # 
 # Quantas observações e quantas colunas há no dataset? Responda no formato de uma tuple `(n_observacoes, n_colunas)`.
 
-# In[ ]:
+# In[4]:
 
 
 def q1():
@@ -50,7 +49,7 @@ def q1():
 # 
 # Há quantas mulheres com idade entre 26 e 35 anos no dataset? Responda como um único escalar.
 
-# In[ ]:
+# In[5]:
 
 
 def q2():
@@ -64,7 +63,7 @@ def q2():
 # 
 # Quantos usuários únicos há no dataset? Responda como um único escalar.
 
-# In[ ]:
+# In[6]:
 
 
 def q3():
@@ -77,12 +76,12 @@ def q3():
 # 
 # Quantos tipos de dados diferentes existem no dataset? Responda como um único escalar.
 
-# In[ ]:
+# In[7]:
 
 
 def q4():
     # Retorne aqui o resultado da questão 4.
-    return int(black_friday.nunique().sum())
+    return int(black_friday.dtypes.nunique())
     pass
 
 
@@ -90,14 +89,14 @@ def q4():
 # 
 # Qual porcentagem dos registros possui ao menos um valor null (`None`, `ǸaN` etc)? Responda como um único escalar entre 0 e 1.
 
-# In[ ]:
+# In[8]:
 
 
 def q5():
     # Retorne aqui o resultado da questão 5.
-    mySet = black_friday.isnull().nunique()
-    nullSet = mySet[mySet > 1].count()
-    return float(nullSet / mySet.count())
+    mySet = black_friday
+    atLeastOneNull = (mySet.count().max() - mySet.count().min()) / mySet.count().max()
+    return float(atLeastOneNull)
     pass
 
 
@@ -105,11 +104,24 @@ def q5():
 # 
 # Quantos valores null existem na variável (coluna) com o maior número de null? Responda como um único escalar.
 
-# In[ ]:
+# In[9]:
 
 
 def q6():
     # Retorne aqui o resultado da questão 6.
+    mySet = black_friday.isnull().nunique()
+    nullIndex = mySet[mySet > 1].index
+    columsWithNull = black_friday[nullIndex].isnull()
+    columsWithNull[columsWithNull['Product_Category_3'] == True].count()
+    storeData = {}
+    highestNum = 0
+    for index in nullIndex:
+        numberOfNulls = columsWithNull[columsWithNull[index] == True].count()[0]
+        storeData[index] = numberOfNulls
+    for key in storeData:
+        if (storeData[key] > highestNum):
+            highestNum = storeData[key]
+    return int(highestNum)
     pass
 
 
@@ -117,11 +129,12 @@ def q6():
 # 
 # Qual o valor mais frequente (sem contar nulls) em `Product_Category_3`? Responda como um único escalar.
 
-# In[ ]:
+# In[10]:
 
 
 def q7():
     # Retorne aqui o resultado da questão 7.
+    mySet = black_friday
     return int(mySet['Product_Category_3'].mode())
     pass
 
@@ -130,11 +143,23 @@ def q7():
 # 
 # Qual a nova média da variável (coluna) `Purchase` após sua normalização? Responda como um único escalar.
 
-# In[ ]:
+# In[11]:
 
 
 def q8():
     # Retorne aqui o resultado da questão 8.
+    purchaseColum = black_friday['Purchase']
+    purchaseMean = purchaseColum.mean()
+    purchaseMax = purchaseColum.max()
+    purchaseMin = purchaseColum.min()
+
+    def normalize(x):
+        result = (x - purchaseMin) / (purchaseMax - purchaseMin)
+        return result
+
+    newPurchaseColum = purchaseColum.apply(normalize)
+    newMean = newPurchaseColum.mean()
+    return float(newMean)
     pass
 
 
@@ -142,11 +167,22 @@ def q8():
 # 
 # Quantas ocorrências entre -1 e 1 inclusive existem da variáel `Purchase` após sua padronização? Responda como um único escalar.
 
-# In[ ]:
+# In[12]:
 
 
 def q9():
     # Retorne aqui o resultado da questão 9.
+    purchaseColum = black_friday['Purchase']
+    purchaseMean = purchaseColum.mean()
+    purchaseStd = purchaseColum.std()
+
+    def padronize(x):
+        result = (x - purchaseMean) / purchaseStd
+        return result
+
+    newPurchaseColum = purchaseColum.apply(padronize)
+    res = newPurchaseColum[((newPurchaseColum > -1) & (newPurchaseColum < 1))].count()
+    return res
     pass
 
 
@@ -154,10 +190,12 @@ def q9():
 # 
 # Podemos afirmar que se uma observação é null em `Product_Category_2` ela também o é em `Product_Category_3`? Responda com um bool (`True`, `False`).
 
-# In[ ]:
+# In[13]:
 
 
 def q10():
     # Retorne aqui o resultado da questão 10.
+    # observe na questão 6 a variavel storedData irá mostrar que a quantidade de null deles são diferentes
+    return bool(False)
     pass
 
